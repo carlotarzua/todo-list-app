@@ -12,9 +12,9 @@ class TodosController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
+
   private
-  
+
   def todo_params
     params.require(:to_do).permit(:title, :description, :due_date)
   end

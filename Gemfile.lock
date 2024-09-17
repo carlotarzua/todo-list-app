@@ -111,6 +111,11 @@ GEM
       railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.0)
+    faraday (2.11.0)
+      faraday-net_http (>= 2.0, < 3.4)
+      logger
+    faraday-net_http (3.3.0)
+      net-http
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -137,11 +142,18 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailjet (1.8.0)
+      activesupport (>= 5.0.0)
+      faraday (~> 2.1)
+      rack (>= 1.4.0)
+      yajl-ruby
     marcel (1.0.4)
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.25.1)
     msgpack (1.7.2)
+    net-http (0.4.1)
+      uri
     net-imap (0.4.16)
       date
       net-protocol
@@ -274,6 +286,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
+    uri (0.13.1)
     useragent (0.16.10)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -289,6 +302,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yajl-ruby (1.4.3)
     zeitwerk (2.6.18)
 
 PLATFORMS
@@ -297,6 +311,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt
   bootsnap
   brakeman
   capybara
@@ -305,6 +320,7 @@ DEPENDENCIES
   dotenv-rails
   importmap-rails
   jbuilder
+  mailjet
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.1)

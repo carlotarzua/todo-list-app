@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [:edit, :update]
+  before_action :set_todo, only: [:edit, :update, :destroy]
 
   def new
     @todo = ToDo.new
@@ -24,6 +24,19 @@ class TodosController < ApplicationController
       redirect_to todos_path, notice: "ToDo item was successfully updated"
     else
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @todo.destroy
+    redirect_to todos_path, notice: "ToDo item was succesfully deleted"
+  end
+
+  def index
+    @todos = if params[:sort] == 'priority'
+      ToDo.order(:priority)
+    else
+      ToDo.order(:due_date)
     end
   end
 

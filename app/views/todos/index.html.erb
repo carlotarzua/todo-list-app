@@ -1,0 +1,40 @@
+<h1>ToDo List</h1>
+
+<p>Sort by:
+  <%= link_to 'Due Date', todos_path(sort: 'due_date') %> |
+  <%= link_to 'Priority', todos_path(sort: 'priority') %>
+</p>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @todos.each do |todo| %>
+        <tr>
+            <td><%= todo.title %></td>
+            <td><%= todo.description %></td>
+            <td><%= todo.due_date %></td>
+            <td><%= todo.priority %></td>
+            <td>
+                <%= link_to 'Edit', edit_todo_path(todo) %> |
+                <%= link_to 'Delete', todo_path(todo), method: :delete, data: { confirm: 'Are you sure you want to delete this item?' } %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+
+
+
+
+
+

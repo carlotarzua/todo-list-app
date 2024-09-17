@@ -1,0 +1,27 @@
+<h1>Edit ToDo Item</h1>
+
+<%= form_with(url: todo_path(@todo), method: :patch, local: true) do |form| %>
+    <div class="field">
+        <%= form.label :title %>
+        <%= form.text_field :title %>
+    </div>
+
+    <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+    </div>
+
+    <div class="field">
+        <%= form.label :due_date %>
+        <%= form.date_select :due_date %>
+    </div>
+
+    <div class="actions">
+        <%= form.submit "Update ToDo" %>
+    </div>
+<% end %>
+
+<%= link_to 'Back', todos_path %>
+
+
+

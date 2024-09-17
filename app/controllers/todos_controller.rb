@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [:edit, :update, :destroy]
+  before_action :set_todo, only: [ :edit, :update, :destroy ]
 
   def new
     @todo = ToDo.new
@@ -33,7 +33,7 @@ class TodosController < ApplicationController
   end
 
   def index
-    @todos = if params[:sort] == 'priority'
+    @todos = if params[:sort] == "priority"
       ToDo.order(:priority)
     else
       ToDo.order(:due_date)

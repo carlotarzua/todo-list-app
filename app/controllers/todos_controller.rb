@@ -32,8 +32,21 @@ class TodosController < ApplicationController
   end
 
   def index
-    @todos = if params[:sort] == "priority"
-      ToDo.order(:priority)
+    @todos = ToDo.all
+
+    if params[:search].present?
+      @todos = @todos.where("title LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+    if params[:sort] == "priority"
+      @todos = ToDo.find_by_sql(
+        "SELECT * FROM to_dos
+        ORDER BY CASE priority
+          WHEN 'low' THEN 3
+          WHEN 'medium' THEN 2
+          WHEN 'high' THEN 1
+          ELSE 4
+        END"
+      )
     else
       ToDo.order(:due_date)
     end
@@ -46,6 +59,6 @@ class TodosController < ApplicationController
   end
 
   def todo_params
-    params.require(:to_do).permit(:title, :description, :due_date, :priority)
+    params.require(:to_do).permit(:title, :description, :due_date, :priority, :completed)
   end
 end

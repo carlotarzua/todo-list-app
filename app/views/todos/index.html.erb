@@ -4,14 +4,16 @@
   <%= link_to 'Due Date', todos_path(sort: 'due_date') %> |
   <%= link_to 'Priority', todos_path(sort: 'priority') %>
 </p>
-
-<p>
-    <strong>Priority | 1:High 2:Medium 3:Low </strong>
-</p> 
-
+<%= form_tag "/todos", method: "GET" do %>
+    <%= label_tag :search_by_title_or_description %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Submit" %>
+    <%= link_to 'Back to ToDos', todos_path, class: "button" %>
+<% end %>
 <table>
     <thead>
         <tr>
+            <th>Completed</th>
             <th>Title</th>
             <th>Description</th>
             <th>Due Date</th>
@@ -22,6 +24,12 @@
     <tbody>
         <% @todos.each do |todo| %>
         <tr>
+            <td>
+                <%= form_with(model: todo, url: todo_path(todo), method: :patch, local: true) do |f| %>
+                    <%= f.check_box :completed, { checked: todo.completed } %>
+                    <%= f.submit 'Save' %>
+                <% end %>
+            </td>
             <td><%= todo.title %></td>
             <td><%= todo.description %></td>
             <td><%= todo.due_date %></td>
@@ -36,12 +44,3 @@
 
 
 <%= link_to 'Create New Todo', new_todo_path %>
-
-
-
-
-
-
-
-
-

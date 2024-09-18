@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "home#login"
 
   # Devise routes for user authentication
-  devise_for :users, controllers: { sessions: "users/sessions", registrations: 'users/registrations'}
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
 
   # Resourceful routes for todos
   resources :todos, only: [ :new, :create, :edit, :update, :index, :destroy ]

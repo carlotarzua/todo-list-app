@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <p class="notice"><%= notice %></p>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
   <p class="alert"><%= alert %></p>
   <head>
     <title><%= content_for(:title) || "To Do" %></title>

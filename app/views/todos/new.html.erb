@@ -17,8 +17,8 @@
     </div>
 
     <div>
-    <%= form.label :priority, "Priority | 1:High 2:Medium 3:Low " %>
-    <%= form.select :priority, options_for_select([1, 2, 3]) %>
+    <%= form.label :priority, "Priority" %>
+    <%= form.select :priority, options_for_select([['Low', 'low'], ['Medium', 'medium'], ['High', 'high']]) %>
     </div>
 
     <div>

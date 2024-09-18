@@ -16,6 +16,11 @@
         <%= form.date_select :due_date %>
     </div>
 
+    <div class="field">
+        <%= form.label :priority, "Priority | 1:High 2:Medium 3:Low " %>
+        <%= form.select :priority, options_for_select([1, 2, 3]) %>
+    </div>
+
     <div class="actions">
         <%= form.submit "Update ToDo" %>
     </div>

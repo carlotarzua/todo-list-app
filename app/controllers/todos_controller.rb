@@ -1,6 +1,5 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [ :edit, :update, :destroy ]
-
   def new
     @todo = ToDo.new
   end
@@ -9,7 +8,7 @@ class TodosController < ApplicationController
     @todo = ToDo.new(todo_params)
 
     if @todo.save
-      redirect_to new_todo_path, notice: "ToDo item was successfully created."
+      redirect_to todos_path, notice: "ToDo item was successfully created."
     else
       render :new, status: :unprocessable_entity
     end

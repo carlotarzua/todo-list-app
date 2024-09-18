@@ -1,6 +1,6 @@
 <h1>Edit ToDo Item</h1>
 
-<%= form_with(url: todo_path(@todo), method: :patch, local: true) do |form| %>
+<%= form_with(url: todo_path(@todo), model: @todo, method: :patch, local: true) do |form| %>
     <div class="field">
         <%= form.label :title %>
         <%= form.text_field :title %>

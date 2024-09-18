@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   # Use Devise's sign-in page as the root
-  root to: 'home#login'
+  root to: "home#login"
 
   # Devise routes for user authentication
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: "users/sessions" }
 
   # Resourceful routes for todos
   resources :todos, only: [ :new, :create, :edit, :update, :index, :destroy ]
@@ -15,4 +15,3 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 end
-

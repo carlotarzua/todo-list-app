@@ -1,5 +1,10 @@
 <h1>ToDo List</h1>
 
+<div> 
+    <%= button_to "Sign Out", destroy_user_session_path, method: :delete %> 
+    <%= button_to "Edit Profile", edit_user_registration_path, method: :get%>
+</div>
+
 <p>Sort by:
   <%= link_to 'Due Date', todos_path(sort: 'due_date') %> |
   <%= link_to 'Priority', todos_path(sort: 'priority') %>
@@ -43,4 +48,4 @@
 </table>
 
 
-<%= link_to 'Create New Todo', new_todo_path %>
+<%= link_to 'Create New ToDo', new_todo_path %>

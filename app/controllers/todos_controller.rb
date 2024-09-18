@@ -37,18 +37,18 @@ class TodosController < ApplicationController
     if params[:search].present?
       @todos = @todos.where("title LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     end
+
     if params[:sort] == "priority"
-      @todos = ToDo.find_by_sql(
-        "SELECT * FROM to_dos
-        ORDER BY CASE priority
-          WHEN 'low' THEN 3
-          WHEN 'medium' THEN 2
+      @todos = ToDo.order(
+        Arel.sql("CASE priority
           WHEN 'high' THEN 1
+          WHEN 'medium' THEN 2
+          WHEN 'low' THEN 3
           ELSE 4
-        END"
+        END"), :due_date
       )
     else
-      ToDo.order(:due_date)
+      @todos = @todos.order(:due_date)
     end
   end
 

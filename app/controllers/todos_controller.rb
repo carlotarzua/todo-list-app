@@ -6,6 +6,9 @@ class TodosController < ApplicationController
 
   def create
     @todo = ToDo.new(todo_params)
+    @todo.email = current_user.email
+    config.time_zone = "Central Time (US & Canada)"
+    @todo.due_datetime = convert_to_central_time(@todo.due_datetime) if @todo.due_datetime.present?
 
     if @todo.save
       redirect_to todos_path, notice: "ToDo item was successfully created."
@@ -19,6 +22,7 @@ class TodosController < ApplicationController
   end
 
   def update
+    @todo.due_datetime = convert_to_central_time(todo_params[:due_datetime]) if todo_params[:due_datetime].present?
     if @todo.update(todo_params)
       redirect_to todos_path, notice: "ToDo item was successfully updated"
     else
@@ -32,7 +36,7 @@ class TodosController < ApplicationController
   end
 
   def index
-    @todos = ToDo.all
+    @todos = ToDo.where(email: current_user.email)
 
     if params[:search].present?
       @todos = @todos.where("title LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
@@ -49,10 +53,10 @@ class TodosController < ApplicationController
           WHEN 'medium' THEN 2
           WHEN 'low' THEN 3
           ELSE 4
-        END"), :due_date
+        END"), :due_datetime
       )
     else
-      @todos = @todos.order(:due_date)
+      @todos = @todos.order(:due_datetime)
     end
   end
 
@@ -63,6 +67,10 @@ class TodosController < ApplicationController
   end
 
   def todo_params
-    params.require(:to_do).permit(:title, :description, :due_date, :priority, :completed, :category_id)
+    params.require(:to_do).permit(:title, :description, :due_datetime, :priority, :reminder, :completed, :category_id)
+  end
+
+  def convert_to_central_time(datetime)
+    datetime.in_time_zone("Central Time (US & Canada)")
   end
 end

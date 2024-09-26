@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_25_221952) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_26_165730) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,12 +23,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_221952) do
   create_table "to_dos", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.date "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "priority"
     t.boolean "completed"
     t.bigint "category_id"
+    t.string "reminder"
+    t.string "email"
+    t.datetime "due_datetime"
     t.index ["category_id"], name: "index_to_dos_on_category_id"
   end
 

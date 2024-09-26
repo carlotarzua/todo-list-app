@@ -3,9 +3,9 @@
 one:
   title: MyString
   description: MyText
-  due_date: 2024-09-16
+  due_datetime: 2024-09-16
 
 two:
   title: MyString
   description: MyText
-  due_date: 2024-09-16
+  due_datetime: 2024-09-16

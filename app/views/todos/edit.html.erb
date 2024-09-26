@@ -3,7 +3,7 @@
 <%= form_with(url: todo_path(@todo), model: @todo, method: :patch, local: true) do |form| %>
     <div class="field">
         <%= form.label :title %>
-        <%= form.text_field :title %>
+        <%= form.text_field :title%>
     </div>
 
     <div class="field">
@@ -12,13 +12,19 @@
     </div>
 
     <div class="field">
-        <%= form.label :due_date %>
-        <%= form.date_select :due_date %>
+        <%= form.label :due_datetime %>
+        <%= form.datetime_select :due_datetime %>
     </div>
+
 
     <div class="field">
         <%= form.label :priority, "Priority" %>
         <%= form.select :priority, options_for_select([['Low', 'low'], ['Medium', 'medium'], ['High', 'high']], @todo.priority) %>
+    </div>
+
+    <div class="field">
+    <%= form.label :reminder, "Reminder Notification" %>
+    <%= form.select :reminder, options_for_select([['None'], ['1 hour'], ['1 day'], ['1 week']], @todo.reminder) %>
     </div>
 
     <div class="actions">

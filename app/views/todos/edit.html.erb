@@ -23,8 +23,13 @@
     </div>
 
     <div class="field">
-    <%= form.label :reminder, "Reminder Notification" %>
-    <%= form.select :reminder, options_for_select([['None'], ['1 hour'], ['1 day'], ['1 week']], @todo.reminder) %>
+        <%= form.label :category_id, "Category" %>
+        <%= form.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category" %>
+    </div>
+
+    <div class="field">
+        <%= form.label :reminder, "Reminder Notification" %>
+        <%= form.select :reminder, options_for_select([['None'], ['1 hour'], ['1 day'], ['1 week']], @todo.reminder) %>
     </div>
 
     <div class="actions">

@@ -42,6 +42,10 @@ class TodosController < ApplicationController
       @todos = @todos.where("title LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     end
 
+    if params[:category_id].present?
+      @todos = @todos.where(category_id: params[:category_id])
+    end
+
     if params[:sort] == "priority"
       @todos = ToDo.order(
         Arel.sql("CASE priority
@@ -63,7 +67,7 @@ class TodosController < ApplicationController
   end
 
   def todo_params
-    params.require(:to_do).permit(:title, :description, :due_datetime, :priority, :reminder, :completed)
+    params.require(:to_do).permit(:title, :description, :due_datetime, :priority, :reminder, :completed, :category_id)
   end
 
   def convert_to_central_time(datetime)

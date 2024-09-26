@@ -1,7 +1,7 @@
 <h1>ToDo List</h1>
 
-<div> 
-    <%= button_to "Sign Out", destroy_user_session_path, method: :delete %> 
+<div>
+    <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
     <%= button_to "Edit Profile", edit_user_registration_path, method: :get%>
 </div>
 
@@ -15,6 +15,13 @@
     <%= submit_tag "Submit" %>
     <%= link_to 'Back to ToDos', todos_path, class: "button" %>
 <% end %>
+
+<%= form_with(url: todos_path, method: :get, local: true) do |form| %>
+    <%= form.select :category_id, options_for_select([['All Categories', nil]] + Category.all.pluck(:name, :id), selected: params[:category_id]), { include_blank: false } %>
+    <%= form.submit 'Filter' %>
+<% end %>
+
+
 <table>
     <thead>
         <tr>
@@ -23,6 +30,7 @@
             <th>Description</th>
             <th>Due Date</th>
             <th>Priority</th>
+            <th>Category</th>
             <th>Reminder</th>
             <th>Actions</th>
         </tr>
@@ -40,6 +48,7 @@
             <td><%= todo.description %></td>
             <td><%= todo.due_datetime.strftime("%m-%d-%Y %H:%M") %></td>
             <td><%= todo.priority %></td>
+            <td><%= todo.category&.name || "No Category" %></td>
             <td><%= todo.reminder %></td>
             <td>
                 <%= button_to 'Edit', edit_todo_path(todo), method: :get %>

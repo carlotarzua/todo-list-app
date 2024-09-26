@@ -14,6 +14,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_26_165730) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "to_dos", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -21,9 +27,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_26_165730) do
     t.datetime "updated_at", null: false
     t.string "priority"
     t.boolean "completed"
+    t.bigint "category_id"
     t.string "reminder"
     t.string "email"
     t.datetime "due_datetime"
+    t.index ["category_id"], name: "index_to_dos_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,4 +50,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_26_165730) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "to_dos", "categories"
 end

@@ -1,6 +1,5 @@
 class ToDo < ApplicationRecord
-    validates :title, presence: true
-    validates :description, presence: true
-    validates :due_date, presence: true
-    validates :priority, presence: true
+    belongs_to :category, optional: true
+
+    validates :title, :description, :due_date, :priority, presence: true
 end

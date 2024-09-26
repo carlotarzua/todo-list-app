@@ -21,6 +21,11 @@
     <%= form.select :priority, options_for_select([['Low', 'low'], ['Medium', 'medium'], ['High', 'high']]) %>
     </div>
 
+    <div class="field">
+      <%= form.label :category_id, "Category" %>
+      <%= form.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category" %>
+    </div>
+
     <div>
     <%= form.submit "Create ToDo" %>
     </div>

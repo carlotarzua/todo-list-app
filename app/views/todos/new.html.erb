@@ -12,13 +12,19 @@
     </div>
 
     <div>
-    <%= form.label :due_date, "Due Date" %>
-    <%= form.date_select :due_date %>
+    <%= form.label :due_datetime, "Due Date" %>
+    <%= form.datetime_select :due_datetime %>
     </div>
+
 
     <div>
     <%= form.label :priority, "Priority" %>
     <%= form.select :priority, options_for_select([['Low', 'low'], ['Medium', 'medium'], ['High', 'high']]) %>
+    </div>
+
+    <div>
+    <%= form.label :reminder, "Reminder Notification" %>
+    <%= form.select :reminder, options_for_select([['None'], ['1 hour'], ['1 day'], ['1 week']]) %>
     </div>
 
     <div>

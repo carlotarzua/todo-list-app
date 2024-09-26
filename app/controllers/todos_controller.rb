@@ -67,6 +67,6 @@ class TodosController < ApplicationController
   end
 
   def convert_to_central_time(datetime)
-    datetime.in_time_zone('Central Time (US & Canada)')
+    datetime.in_time_zone("Central Time (US & Canada)")
   end
 end

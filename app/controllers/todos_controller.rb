@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [ :edit, :update, :destroy ]
+  before_action :set_todo, only: [ :edit, :update, :destroy, :start_timer, :stop_timer ]
   def new
     @todo = ToDo.new
   end
@@ -54,6 +54,16 @@ class TodosController < ApplicationController
     else
       @todos = @todos.order(:due_datetime)
     end
+  end
+
+  def start_timer
+    @todo.start_timer
+    redirect_to todos_path, notice: "Timer started for '#{@todo.title}'."
+  end
+
+  def stop_timer
+    @todo.stop_timer
+    redirect_to todos_path, notice: "Timer stopped for '#{@todo.title}'. Total time updated."
   end
 
   private

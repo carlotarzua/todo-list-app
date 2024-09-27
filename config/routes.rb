@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
 
   # Resourceful routes for todos
-  resources :todos, only: [ :new, :create, :edit, :update, :index, :destroy ]
+  resources :todos, only: [ :new, :create, :edit, :update, :index, :destroy ] do
+    member do
+      patch :start_timer
+      patch :stop_timer
+    end
+  end
 
   # Health check endpoint
   get "up" => "rails/health#show", as: :rails_health_check

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_26_165730) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_27_031514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_26_165730) do
     t.string "reminder"
     t.string "email"
     t.datetime "due_datetime"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer "total_time", default: 0
     t.index ["category_id"], name: "index_to_dos_on_category_id"
   end
 

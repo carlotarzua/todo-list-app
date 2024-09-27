@@ -1,7 +1,7 @@
 class ToDo < ApplicationRecord
     belongs_to :category, optional: true
 
-    validates :title, :description, :due_date, :priority, :reminder, :email, presence: true
+    validates :title, :description, :due_datetime, :priority, :reminder, :email, presence: true
 
     after_save :reminder_sender, if: -> { reminder != "None" }
     def reminder_sender

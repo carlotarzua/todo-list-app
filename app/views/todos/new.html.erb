@@ -22,6 +22,11 @@
     <%= form.select :priority, options_for_select([['Low', 'low'], ['Medium', 'medium'], ['High', 'high']]) %>
     </div>
 
+    <div class="field">
+      <%= form.label :category_id, "Category" %>
+      <%= form.collection_select :category_id, Category.all, :id, :name, prompt: "Select Category" %>
+    </div>
+
     <div>
     <%= form.label :reminder, "Reminder Notification" %>
     <%= form.select :reminder, options_for_select([['None'], ['1 hour'], ['1 day'], ['1 week']]) %>

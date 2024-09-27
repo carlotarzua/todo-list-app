@@ -32,5 +32,4 @@ class ToDo < ApplicationRecord
         seconds = total_seconds % 60
         "#{hours}h #{minutes}m #{seconds}s"
     end
-
 end

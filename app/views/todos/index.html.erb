@@ -33,6 +33,7 @@
             <th>Category</th>
             <th>Reminder</th>
             <th>Total Time Spent</th>
+            <th>Progress</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -57,6 +58,17 @@
                     <%= button_to 'Stop Timer', stop_timer_todo_path(todo), method: :patch %>
                 <% else %>
                     <%= button_to 'Start Timer', start_timer_todo_path(todo), method: :patch %>
+                <% end %>
+            </td>
+            <td>
+                <%= form_with(model: todo, url: todo_path(todo), method: :patch, local: true) do |f| %>
+                    <div style="display: flex; align-items: center;">
+                        <span>0</span>
+                        <%= f.range_field :progress, min: 0, max: 100, step: 1, value: todo.progress || 0, id: "progress-slider-#{todo.id}", oninput: "document.getElementById('progress-value-#{todo.id}').textContent = this.value + '%';" %>
+                        <span>100</span>
+                    </div>
+                    <p id="progress-value-<%= todo.id %>"><%= todo.progress || 0 %>%</p>
+                    <%= f.submit 'Update Progress' %>
                 <% end %>
             </td>
             <td>

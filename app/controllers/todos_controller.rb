@@ -77,7 +77,7 @@ class TodosController < ApplicationController
   end
 
   def todo_params
-    params.require(:to_do).permit(:title, :description, :due_datetime, :priority, :reminder, :completed, :category_id)
+    params.require(:to_do).permit(:title, :description, :due_datetime, :priority, :reminder, :completed, :category_id, :progress)
   end
 
   def convert_to_central_time(datetime)

@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [ :edit, :update, :destroy, :start_timer, :stop_timer, :archive]
+  before_action :set_todo, only: [ :edit, :update, :destroy, :start_timer, :stop_timer, :archive ]
   def new
     @todo = ToDo.new
   end

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :teams do
     member do
-    post 'invite'
+    post "invite"
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_29_193605) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_30_033530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_29_193605) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "owner_id"
+    t.index ["owner_id"], name: "index_teams_on_owner_id"
+    t.index ["user_id"], name: "index_teams_on_user_id"
+  end
+
+  create_table "teams_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "team_id", null: false
+    t.index ["team_id", "user_id"], name: "index_teams_users_on_team_id_and_user_id"
+    t.index ["user_id", "team_id"], name: "index_teams_users_on_user_id_and_team_id"
+  end
+
   create_table "to_dos", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -27,8 +45,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_29_193605) do
     t.datetime "updated_at", null: false
     t.string "priority"
     t.boolean "completed"
-    t.bigint "category_id"
     t.string "reminder"
+    t.bigint "category_id"
     t.string "email"
     t.datetime "due_datetime"
     t.datetime "start_time"
@@ -56,5 +74,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_29_193605) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "teams", "users"
+  add_foreign_key "teams", "users", column: "owner_id"
   add_foreign_key "to_dos", "categories"
 end

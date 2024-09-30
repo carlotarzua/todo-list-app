@@ -10,6 +10,11 @@ Rails.application.routes.draw do
     member do
       patch :start_timer
       patch :stop_timer
+      patch :archive
+    end
+
+    collection do
+      get :archived
     end
   end
 

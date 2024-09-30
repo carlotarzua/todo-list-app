@@ -1,0 +1,26 @@
+<h1>Archived ToDo Items</h1>
+
+<% if @archived_to_dos.any? %>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @archived_to_dos.each do |to_do| %>
+                <tr>
+                    <td><%= to_do.title %></td>
+                    <td><%= to_do.description %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% else %>
+    <p>No archived ToDo items. </p>
+<% end %>
+
+<p>
+  <%= link_to 'Back to ToDos', todos_path, class: "button" %>
+</p>

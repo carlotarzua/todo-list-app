@@ -4,6 +4,9 @@ class ToDo < ApplicationRecord
     validates :title, :description, :due_datetime, :priority, :reminder, :email, presence: true
     validates :progress, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
+    scope :archived, -> { where(archived: true) }
+    scope :not_archived, -> { where(archived: false) }
+
     after_save :reminder_sender, if: -> { reminder != "None" }
     def reminder_sender
         reminder_time = case reminder

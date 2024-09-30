@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_28_172125) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_29_193605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_28_172125) do
     t.datetime "end_time"
     t.integer "total_time", default: 0
     t.integer "progress", default: 0
+    t.boolean "archived", default: false, null: false
     t.index ["category_id"], name: "index_to_dos_on_category_id"
   end
 

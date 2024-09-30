@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [ :edit, :update, :destroy, :start_timer, :stop_timer ]
+  before_action :set_todo, only: [ :edit, :update, :destroy, :start_timer, :stop_timer, :archive]
   def new
     @todo = ToDo.new
   end
@@ -68,6 +68,19 @@ class TodosController < ApplicationController
   def stop_timer
     @todo.stop_timer
     redirect_to todos_path, notice: "Timer stopped for '#{@todo.title}'. Total time updated."
+  end
+
+  def archive
+    @to_do = ToDo.find(params[:id])
+    if @todo.update(archived: true)
+      redirect_to todos_path, notice: "Item succesfully archived."
+    else
+      redirect_to todos_path, notice: "Failed to archive item"
+    end
+  end
+
+  def archived
+    @archived_to_dos = ToDo.archived.where(email: current_user.email)
   end
 
   private

@@ -1,0 +1,20 @@
+<h1>Edit Team</h1>
+
+<%= form_with model: @team, local: true do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.submit 'Update Team' %>
+</div>
+
+<% end %>
+<%= button_to 'Delete Team', team_path(@team), method: :delete, class: "button" %>
+<%= link_to 'Back to Teams', teams_path, method: :get%>

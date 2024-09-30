@@ -18,6 +18,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :teams do
+    member do
+    post 'invite'
+    end
+  end
+
   # Health check endpoint
   get "up" => "rails/health#show", as: :rails_health_check
 

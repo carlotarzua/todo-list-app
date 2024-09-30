@@ -1,0 +1,31 @@
+<h1>Your Teams</h1>
+
+<%= button_to 'Create New Team', new_team_path, method: :get %>
+<%= link_to 'Back to ToDo', todos_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Team Name</th>
+      <th>Description</th>
+      <th>Owner Email</th>
+      <th>Members Emails</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= link_to team.name, team %></td>
+        <td><%= team.description %></td>
+        <td><%= User.find(team.owner_id).email %></td>
+        <td>
+          <ul>
+            <% team.user_ids.each do |user_id| %>
+              <li><%= User.find(user_id).email %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

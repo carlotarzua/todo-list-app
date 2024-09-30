@@ -1,0 +1,21 @@
+<h1><%= @team.name %></h1>
+<p><%= @team.description %></p>
+
+<h2>Members</h2>
+<ul>
+  <% @team.users.each do |user| %>
+    <li><%= user.email %></li>
+  <% end %>
+</ul>
+
+<h3>Invite a New Member</h3>
+<%= form_with url: invite_team_path(@team), method: :post do %>
+  <div>
+    <%= label_tag :email, "Email" %>
+    <%= text_field_tag :email %>
+  </div>
+  <%= submit_tag "Send Invitation" %>
+<% end %>
+
+<%= link_to 'Edit Team', edit_team_path(@team) %>
+<%= link_to 'Back to Teams', teams_path %>

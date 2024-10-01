@@ -45,8 +45,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_171414) do
     t.datetime "updated_at", null: false
     t.string "priority"
     t.boolean "completed"
-    t.bigint "category_id"
     t.string "reminder"
+    t.bigint "category_id"
     t.string "email"
     t.datetime "due_datetime"
     t.datetime "start_time"

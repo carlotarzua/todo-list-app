@@ -1,0 +1,7 @@
+<p>Welcome <%= @user.email %>!</p>
+
+<p>You have been invited to join the team "<%= @team.name %>".</p>
+
+<p>Click the link below to join the team:</p>
+
+<p><%= link_to 'Join my team', join_team_url(@team) %></p>

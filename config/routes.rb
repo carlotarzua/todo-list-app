@@ -23,6 +23,9 @@ Rails.application.routes.draw do
       post "invite"
       get "join"
     end
+    resources :shared_lists do
+      resources :todos
+    end
   end
 
   # Health check endpoint

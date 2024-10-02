@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [ :edit, :update, :destroy, :start_timer, :stop_timer, :archive ]
-  before_action :set_team, only: [:team_todos]
+  before_action :set_team, only: [ :team_todos ]
 
   def new
     @todo = ToDo.new
@@ -51,8 +51,8 @@ class TodosController < ApplicationController
     if params[:team_id].present?
       @todos = @todos.where(team_id: params[:team_id])
     end
-    
-  end
+
+    end
 
     if params[:sort] == "priority"
       @todos = ToDo.order(
@@ -117,5 +117,4 @@ class TodosController < ApplicationController
     @team = Team.find_by(id: params[:id])
     redirect_to teams_path, alert: "Team not found." if @team.nil?
   end
-
 end

@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [ :show, :edit, :update, :destroy ]
 
   # GET /teams
   def index
@@ -39,7 +39,7 @@ class TeamsController < ApplicationController
     end
   end
 
-  def destroy    
+  def destroy
     if @team.owner_id == current_user.id
       @team.destroy
       redirect_to teams_path, notice: "Team was successfully deleted."
@@ -98,4 +98,3 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:name, :description)
   end
 end
-

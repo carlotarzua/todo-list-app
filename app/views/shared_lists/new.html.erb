@@ -1,0 +1,41 @@
+<h1>New ToDo for <%= @shared_list.name %></h1>
+
+<%= form_with(model: [@shared_list, @to_do], local: true) do |form| %>
+  <% if @to_do.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@to_do.errors.count, "error") %> prohibited this todo from being saved:</h2>
+      <ul>
+        <% @to_do.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.select :priority, ['low', 'medium', 'high'] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :due_datetime %>
+    <%= form.datetime_select :due_datetime %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', team_shared_lists_path(@team) %>
+

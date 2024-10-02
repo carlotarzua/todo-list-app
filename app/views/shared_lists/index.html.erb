@@ -1,0 +1,11 @@
+<h1>Shared Lists</h1>
+
+<ul>
+  <% @shared_lists.each do |shared_list| %>
+    <li>
+      <%= link_to shared_list.name, team_shared_list_path(@team, shared_list) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'New Shared List', new_team_shared_list_path(@team) %>

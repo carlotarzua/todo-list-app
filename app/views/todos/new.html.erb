@@ -1,6 +1,7 @@
 <h1>Create New ToDo</h1>
 
 <%= form_with model: @todo, url: todos_path, local: true do |form| %>
+    <%= form.hidden_field :team_id, value: @team.id if @team%>
     <div>
     <%= form.label :title, "Title" %>
     <%= form.text_field :title %>

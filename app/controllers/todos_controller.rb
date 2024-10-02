@@ -1,7 +1,10 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [ :edit, :update, :destroy, :start_timer, :stop_timer, :archive ]
+  before_action :set_team, only: [:team_todos]
+
   def new
     @todo = ToDo.new
+    @team = Team.find(params[:team_id]) if params[:team_id]
   end
 
   def create
@@ -44,7 +47,12 @@ class TodosController < ApplicationController
 
     if params[:category_id].present?
       @todos = @todos.where(category_id: params[:category_id])
+
+    if params[:team_id].present?
+      @todos = @todos.where(team_id: params[:team_id])
     end
+    
+  end
 
     if params[:sort] == "priority"
       @todos = ToDo.order(
@@ -90,10 +98,25 @@ class TodosController < ApplicationController
   end
 
   def todo_params
-    params.require(:to_do).permit(:title, :description, :due_datetime, :priority, :reminder, :completed, :category_id, :progress)
+    params.require(:to_do).permit(:title, :description, :due_datetime, :priority, :reminder, :completed, :category_id, :progress, :team_id)
   end
 
   def convert_to_central_time(datetime)
     datetime.in_time_zone("Central Time (US & Canada)")
   end
+
+  def team_todos
+    if @team.nil?
+      redirect_to teams_path, alert: "Team not found."
+      return
+    end
+    @todos = ToDo.where(team_id: @team.id)
+    Rails.logger.debug("ToDos fetched: #{@todos.to_a}")
+  end
+
+  def set_team
+    @team = Team.find_by(id: params[:id])
+    redirect_to teams_path, alert: "Team not found." if @team.nil?
+  end
+
 end

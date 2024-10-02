@@ -1,0 +1,12 @@
+<h1>Edit Shared List</h1>
+
+<%= form_with(model: [@team, @shared_list], local: true) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, value: @shared_list.name %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Shared List" %>
+  </div>
+<% end %>

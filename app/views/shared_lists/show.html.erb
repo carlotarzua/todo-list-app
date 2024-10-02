@@ -1,0 +1,19 @@
+<h1><%= @shared_list.name %></h1>
+
+<%= link_to 'Add ToDo', new_team_shared_list_todo_path(@team, @shared_list) %>
+
+<h2>ToDos</h2>
+<ul>
+  <% @shared_list.to_dos.each do |to_do| %>
+    <li>
+      <strong><%= to_do.title %></strong>
+      <p><%= to_do.description %></p>
+      <p>Due: <%= to_do.due_datetime %></p>
+      <p>Priority: <%= to_do.priority %></p>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_team_shared_list_path(@team, @shared_list) %> |
+<%= link_to 'Back', team_shared_lists_path(@team) %>
+

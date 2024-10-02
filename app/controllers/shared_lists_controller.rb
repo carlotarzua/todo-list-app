@@ -1,6 +1,6 @@
 class SharedListsController < ApplicationController
     before_action :set_team
-    before_action :set_shared_list, only: [:show, :edit, :update, :destroy, :new_todo, :create_todo]
+    before_action :set_shared_list, only: [ :show, :edit, :update, :destroy, :new_todo, :create_todo ]
 
     def index
         @shared_lists = @team.shared_lists
@@ -19,7 +19,7 @@ class SharedListsController < ApplicationController
         if @shared_list.save
             redirect_to team_shared_lists_path(@team), notice: "Shared List created successfully."
         else
-            render: new
+            render :new
         end
     end
 
@@ -30,7 +30,7 @@ class SharedListsController < ApplicationController
     def update
         @shared_list = @team.shared_lists.find(params[:id])
     if @shared_list.update(shared_list_params)
-        redirect_to team_shared_list_path(@team, @shared_list), notice: 'Shared list updated successfully.'
+        redirect_to team_shared_list_path(@team, @shared_list), notice: "Shared list updated successfully."
     else
         render :edit
     end
@@ -39,7 +39,7 @@ class SharedListsController < ApplicationController
     def destroy
         @shared_list = @team.shared_lists.find(params[:id])
         @shared_list.destroy
-        redirect_to team_shared_lists_path(@team), notice: 'Shared list deleted successfully.'
+        redirect_to team_shared_lists_path(@team), notice: "Shared list deleted successfully."
     end
 
     private
@@ -61,18 +61,18 @@ class SharedListsController < ApplicationController
         @to_do.email = current_user.email  # Set the email of the user creating the todo
 
         if @to_do.save
-            redirect_to team_shared_list_path(@team, @shared_list), notice: 'ToDo was successfully created.'
+            redirect_to team_shared_list_path(@team, @shared_list), notice: "ToDo was successfully created."
         else
             render :new_todo
         end
     end
-    
+
     private
 
     def set_shared_list
       @shared_list = @team.shared_lists.find(params[:id])
     end
-  
+
     def to_do_params
       params.require(:to_do).permit(:title, :description, :priority, :due_datetime)  # Add other permitted attributes as needed
     end

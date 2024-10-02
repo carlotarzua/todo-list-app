@@ -31,9 +31,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_02_190620) do
   create_table "teams", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
+    t.bigint "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "owner_id"
     t.bigint "user_id", null: false
     t.index ["owner_id"], name: "index_teams_on_owner_id"
     t.index ["user_id"], name: "index_teams_on_user_id"
@@ -53,20 +53,21 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_02_190620) do
     t.datetime "updated_at", null: false
     t.string "priority"
     t.boolean "completed"
+    t.bigint "category_id"
     t.string "reminder"
     t.string "email"
     t.datetime "due_datetime"
-    t.bigint "category_id"
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer "total_time", default: 0
     t.integer "progress", default: 0
     t.boolean "archived", default: false, null: false
+    t.bigint "team_id"
     t.bigint "shared_list_id"
-    t.integer "team_id"
     t.integer "assigned_user_id"
     t.index ["category_id"], name: "index_to_dos_on_category_id"
     t.index ["shared_list_id"], name: "index_to_dos_on_shared_list_id"
+    t.index ["team_id"], name: "index_to_dos_on_team_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,4 +92,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_02_190620) do
   add_foreign_key "teams", "users", column: "owner_id"
   add_foreign_key "to_dos", "categories"
   add_foreign_key "to_dos", "shared_lists"
+  add_foreign_key "to_dos", "teams"
 end

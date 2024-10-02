@@ -111,7 +111,6 @@ class TodosController < ApplicationController
       return
     end
     @todos = ToDo.where(team_id: @team.id)
-    Rails.logger.debug("ToDos fetched: #{@todos.to_a}")
   end
 
   def set_team

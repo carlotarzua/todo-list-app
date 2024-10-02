@@ -33,9 +33,25 @@
     <%= form.select :reminder, options_for_select([['None'], ['1 hour'], ['1 day'], ['1 week']]) %>
     </div>
 
+    <% if @team %>
+    <div class="field">
+      <%= form.label :assigned_user_id, "Assign to" %>
+      <%= form.select :assigned_user_id, 
+          options_for_select([["All", "all"], ["Anyone", "anyone"]] + @team.users.map { |user| [user.email, user.id] }, selected: @todo.assigned_user_id),
+          include_blank: true %>
+    </div>
+    <% end %>
+
     <div>
     <%= form.submit "Create ToDo" %>
     </div>
+
+    <% if @team %>
+      <%= link_to 'Back to Teams', team_path(@team) %>
+    <% else %>
+      <%= link_to 'Back to Home', todos_path %>
+    <% end %>
+
 <% end %>
 
 

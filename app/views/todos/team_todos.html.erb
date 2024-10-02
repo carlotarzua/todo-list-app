@@ -1,0 +1,31 @@
+<% todos = ToDo.where(team_id: @team.id) %>
+<h1>ToDos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Due Date</th>
+      <th>Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if todos.present? %> 
+      <% todos.each do |todo| %> <!-- Iterate over `todos` not `@todos` -->
+        <tr>
+          <td><%= todo.title %></td>
+          <td><%= todo.description %></td>
+          <td><%= todo.due_datetime %></td>
+          <td><%= todo.priority %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <p>No ToDo items found for this team.</p>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Back to Teams', teams_path %>
+
+
+

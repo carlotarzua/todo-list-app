@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :timeoutable
   has_many :teams, foreign_key: :owner_id
   has_and_belongs_to_many :teams
+  has_many :shared_lists, through: :teams
 end

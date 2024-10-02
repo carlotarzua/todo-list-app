@@ -10,6 +10,7 @@
       <th>Description</th>
       <th>Owner Email</th>
       <th>Members Emails</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -25,7 +26,12 @@
             <% end %>
           </ul>
         </td>
+        <td>
+          <%= link_to 'Create New ToDo', new_team_to_do_path(team), class: 'button' %>
+          <%= link_to 'View Team ToDos', team_to_dos_path(team), class: 'button' %>
+      </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= link_to 'Create New ToDo', new_todo_path %>

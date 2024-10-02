@@ -22,6 +22,11 @@ Rails.application.routes.draw do
     member do
       post "invite"
       get "join"
+      get "to_dos", to: "todos#team_todos", as: "team_to_dos"
+    end
+    resources :to_dos, controller: "todos", only: [ :new, :create, :index, :show ]
+    resources :shared_lists do
+      resources :to_dos, controller: "todos", only: [ :new, :create ]
     end
   end
 

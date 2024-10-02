@@ -1,5 +1,6 @@
 class ToDo < ApplicationRecord
     belongs_to :category, optional: true
+    belongs_to :shared_list, optional: true
 
     validates :title, :description, :due_datetime, :priority, :reminder, :email, presence: true
     validates :progress, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }

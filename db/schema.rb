@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_30_171414) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_02_050315) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_171414) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "shared_lists", force: :cascade do |t|
+    t.string "name"
+    t.bigint "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_shared_lists_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -45,8 +53,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_171414) do
     t.datetime "updated_at", null: false
     t.string "priority"
     t.boolean "completed"
-    t.string "reminder"
     t.bigint "category_id"
+    t.string "reminder"
     t.string "email"
     t.datetime "due_datetime"
     t.datetime "start_time"
@@ -54,7 +62,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_171414) do
     t.integer "total_time", default: 0
     t.integer "progress", default: 0
     t.boolean "archived", default: false, null: false
+    t.bigint "team_id"
+    t.bigint "shared_list_id"
     t.index ["category_id"], name: "index_to_dos_on_category_id"
+    t.index ["shared_list_id"], name: "index_to_dos_on_shared_list_id"
+    t.index ["team_id"], name: "index_to_dos_on_team_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,7 +86,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_171414) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "shared_lists", "teams"
   add_foreign_key "teams", "users"
   add_foreign_key "teams", "users", column: "owner_id"
   add_foreign_key "to_dos", "categories"
+  add_foreign_key "to_dos", "shared_lists"
+  add_foreign_key "to_dos", "teams"
 end

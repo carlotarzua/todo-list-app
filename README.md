@@ -251,11 +251,11 @@ CI runs all of the above automatically on every push via GitHub Actions.
 
 ## 👩‍💻 About Me
 
-Built by **Carlota Rzua** — a full-stack developer who enjoys building practical, well-structured Rails applications with real-world features like background jobs, email automation, and team collaboration.
+Built by **Carlota Arzúa** — a full-stack developer who enjoys building practical, well-structured Rails applications with real-world features like background jobs, email automation, and team collaboration.
 
 - 💼 [LinkedIn](https://www.linkedin.com/in/carlota-a-53a75b206/)
 - 🌐 [Portfolio]()
-- 📧 carlotaarzua@email.com
+- 📧 carlotaarzua@gmail.com
 
 ---
 
